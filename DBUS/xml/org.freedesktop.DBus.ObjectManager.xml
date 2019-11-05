@@ -1,0 +1,21 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+    <interface name="org.freedesktop.DBus.ObjectManager">
+        <method name="GetManagedObjects">
+            <!-- org.freedesktop.DBus.ObjectManager.GetManagedObjects (out DICT<OBJPATH,DICT<STRING,DICT<STRING,VARIANT>>> objpath_interfaces_and_properties); -->
+            <arg name="objpath_interfaces_and_properties" type="a{oa{sa{sv}}} " direction="out"/>
+            <annotation name="org.freedesktop.DBus.Deprecated" value="true"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="interfaces_and_properties_type"/>
+        </method>
+        <signal name="InterfacesAdded">
+            <!-- org.freedesktop.DBus.ObjectManager.InterfacesAdded (OBJPATH object_path, DICT<STRING,DICT<STRING,VARIANT>> interfaces_and_properties); -->
+            <arg name="object_path" type="o"/>
+            <arg name="interfaces_and_properties" type="a{sa{sv}}"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="interfaces_and_properties_type"/>
+        </signal>
+        <signal name="InterfacesRemoved">
+            <!-- org.freedesktop.DBus.ObjectManager.InterfacesRemoved (OBJPATH object_path, ARRAY<STRING> interfaces); -->
+            <arg name="object_path" type="o"/>
+            <arg name="interfaces" type="as"/>
+    </interface>
+</node>
