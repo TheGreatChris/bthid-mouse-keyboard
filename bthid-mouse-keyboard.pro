@@ -18,7 +18,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     DBUS/org.bluez.Adapter1.cpp \
-    hid_keyboard.cpp
+    hid_keyboard.cpp \
+    DBUS/org.bluez.ProfileManager1.cpp \
+    DBUS/org.bluez.Profile1.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -27,4 +29,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     DBUS/org.bluez.Adapter1.h \
-    hid_keyboard.h
+    hid_keyboard.h \
+    DBUS/org.bluez.ProfileManager1.h \
+    DBUS/org.bluez.Profile1.h
