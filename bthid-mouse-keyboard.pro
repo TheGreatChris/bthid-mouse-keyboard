@@ -20,7 +20,8 @@ SOURCES += \
     DBUS/org.bluez.Adapter1.cpp \
     hid_keyboard.cpp \
     DBUS/org.bluez.ProfileManager1.cpp \
-    DBUS/org.bluez.Profile1.cpp
+    DBUS/org.bluez.Profile1.cpp \
+    hid_dbusprofile.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -31,4 +32,8 @@ HEADERS += \
     DBUS/org.bluez.Adapter1.h \
     hid_keyboard.h \
     DBUS/org.bluez.ProfileManager1.h \
-    DBUS/org.bluez.Profile1.h
+    DBUS/org.bluez.Profile1.h \
+    hid_dbusprofile.h
+
+DISTFILES += \
+    sdp_service_record.xml
