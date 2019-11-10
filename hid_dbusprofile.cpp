@@ -32,7 +32,6 @@ HID_DBusProfile::HID_DBusProfile(QObject *parent) : QObject(parent)
 //        Pairing is required before connections will be established. No devices will be connected if not paired.
     options.insert("RequireAuthentication", false);
 
-
 //    boolean RequireAuthorization
 //        Request authorization before any connection will be established.
     options.insert("RequireAutorization", false);
@@ -51,17 +50,15 @@ HID_DBusProfile::HID_DBusProfile(QObject *parent) : QObject(parent)
     if(!sdp_record.isOpen()){
         qDebug() << "Couldn't open file" << sdp_record.errorString();
     }
-    options.insert("ServiceRecord", sdp_record.readAll());
+    qDebug() << "sdp_record" << sdp_record.fileName() << "Size" << sdp_record.size();
+    options.insert("ServiceRecord", QString(sdp_record.readAll()));
 
 //    uint16 Version
 //        Profile version (for SDP record)
     options.insert("Version", (uint16_t)0x0001);
 
-
 //    uint16 Features
 //        Profile features (for SDP record)
-
-
 }
 
 void HID_DBusProfile::Cancel()
