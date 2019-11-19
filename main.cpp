@@ -60,5 +60,8 @@ int main(int argc, char *argv[])
     HID_Keyboard kbd(&a);
     kbd.startServer();
 
+    adapter1.setDiscoverable(true);
+    qDebug() << "Discoverable" << adapter1.discoverable();
+
     return a.exec();
 }
