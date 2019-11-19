@@ -70,4 +70,6 @@ void HID_Keyboard::disconnectedInterruptChannel()
 void HID_Keyboard::testTimerExpired()
 {
     qDebug() << "HID_Keyboard::testTimerExpired()";
+    qDebug() << "control socket read:" << controlSocket->bytesAvailable();
+    qDebug() << "inteerupt socket read:" << interruptSocket->bytesAvailable();
 }
