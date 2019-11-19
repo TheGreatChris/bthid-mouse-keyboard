@@ -15,6 +15,9 @@ HID_Keyboard::HID_Keyboard(QObject *parent)
 
     connect(&testTrigger, SIGNAL(timeout()), this, SLOT(testTimerExpired()));
 
+    controlSocket = nullptr;
+    interruptSocket = nullptr;
+
     testTrigger.start(1000);
 }
 
@@ -70,6 +73,10 @@ void HID_Keyboard::disconnectedInterruptChannel()
 void HID_Keyboard::testTimerExpired()
 {
     qDebug() << "HID_Keyboard::testTimerExpired()";
-    qDebug() << "control socket read:" << controlSocket->bytesAvailable();
-    qDebug() << "inteerupt socket read:" << interruptSocket->bytesAvailable();
+
+    if(controlSocket != nullptr)
+        qDebug() << "control socket read:" << controlSocket->bytesAvailable();
+
+    if(interruptSocket != nullptr)
+        qDebug() << "inteerupt socket read:" << interruptSocket->bytesAvailable();
 }
