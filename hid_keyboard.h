@@ -2,7 +2,7 @@
 #define HID_KEYBOARD_H
 
 #include <QObject>
-
+#include <QTimer>
 #include <QBluetoothServer>
 
 
@@ -25,12 +25,16 @@ public slots:
     void disconnectedControlChannel();
     void disconnectedInterruptChannel();
 
+    void testTimerExpired();
+
 private:
     QBluetoothServer controlChannel;
     QBluetoothServer interruptChannel;
 
     QBluetoothSocket* controlSocket;
     QBluetoothSocket* interruptSocket;
+
+    QTimer testTrigger;
 };
 
 #endif // HID_KEYBOARD_H

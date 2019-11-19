@@ -7,10 +7,15 @@
 HID_Keyboard::HID_Keyboard(QObject *parent)
     : QObject(parent),
       controlChannel(QBluetoothServiceInfo::Protocol::L2capProtocol),
-      interruptChannel(QBluetoothServiceInfo::Protocol::L2capProtocol)
+      interruptChannel(QBluetoothServiceInfo::Protocol::L2capProtocol),
+      testTrigger(this)
 {
     connect(&controlChannel, SIGNAL(newConnection()), this, SLOT(incommingControlChannelConnection()));
     connect(&interruptChannel, SIGNAL(newConnection()), this, SLOT(incommingInterruptChannelConnection()));
+
+    connect(&testTrigger, SIGNAL(timeout()), this, SLOT(testTimerExpired()));
+
+    testTrigger.start(1000);
 }
 
 bool HID_Keyboard::startServer()
@@ -60,4 +65,9 @@ void HID_Keyboard::disconnectedControlChannel()
 void HID_Keyboard::disconnectedInterruptChannel()
 {
     qDebug() << "HID_Keyboard::disconnectedInterruptChannel()";
+}
+
+void HID_Keyboard::testTimerExpired()
+{
+    qDebug() << "HID_Keyboard::testTimerExpired()";
 }
