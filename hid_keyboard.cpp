@@ -11,7 +11,6 @@ HID_Keyboard::HID_Keyboard(QObject *parent)
 {
     connect(&controlChannel, SIGNAL(newConnection()), this, SLOT(incommingControlChannelConnection()));
     connect(&interruptChannel, SIGNAL(newConnection()), this, SLOT(incommingInterruptChannelConnection()));
-
 }
 
 bool HID_Keyboard::startServer()
@@ -30,10 +29,23 @@ bool HID_Keyboard::startServer()
 void HID_Keyboard::incommingControlChannelConnection()
 {
     qDebug() << "incommingControlChannelConnection()";
+    controlSocket = controlChannel.nextPendingConnection();
+    qDebug() << controlSocket->peerName() << controlSocket->peerPort() << controlSocket->peerAddress();
 }
 
 void HID_Keyboard::incommingInterruptChannelConnection()
 {
     qDebug() << "incommingInterruptChannelConnection()";
+    interruptSocket = interruptChannel.nextPendingConnection();
+    qDebug() << interruptSocket->peerName() << interruptSocket->peerPort() << interruptSocket->peerAddress();
+}
 
+void HID_Keyboard::readControlChannel()
+{
+    qDebug() << "HID_Keyboard::readControlChannel()";
+}
+
+void HID_Keyboard::readInterruptChannel()
+{
+    qDebug() << "HID_Keyboard::readInterruptChannel()";
 }

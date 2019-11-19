@@ -19,9 +19,15 @@ public slots:
     void incommingControlChannelConnection();
     void incommingInterruptChannelConnection();
 
+    void readControlChannel();
+    void readInterruptChannel();
+
 private:
     QBluetoothServer controlChannel;
     QBluetoothServer interruptChannel;
+
+    QBluetoothSocket* controlSocket;
+    QBluetoothSocket* interruptSocket;
 };
 
 #endif // HID_KEYBOARD_H
