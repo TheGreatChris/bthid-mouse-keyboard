@@ -74,9 +74,13 @@ void HID_Keyboard::testTimerExpired()
 {
     qDebug() << "HID_Keyboard::testTimerExpired()";
 
-    if(controlSocket != nullptr)
+    if(controlSocket != nullptr){
         qDebug() << "control socket read:" << controlSocket->bytesAvailable();
+        qDebug() << controlSocket->readAll();
+    }
 
-    if(interruptSocket != nullptr)
+    if(interruptSocket != nullptr){
         qDebug() << "inteerupt socket read:" << interruptSocket->bytesAvailable();
+        qDebug() << interruptSocket->readAll();
+    }
 }
