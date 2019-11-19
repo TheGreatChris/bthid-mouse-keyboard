@@ -22,6 +22,9 @@ public slots:
     void readControlChannel();
     void readInterruptChannel();
 
+    void disconnectedControlChannel();
+    void disconnectedInterruptChannel();
+
 private:
     QBluetoothServer controlChannel;
     QBluetoothServer interruptChannel;
