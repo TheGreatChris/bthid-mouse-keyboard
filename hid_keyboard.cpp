@@ -84,9 +84,12 @@ void HID_Keyboard::testTimerExpired()
         qDebug() << interruptSocket->readAll();
     }
 
-    unsigned char test_data[9] = {0x01, 0xE0, 0x00,
+    if(interruptSocket != nullptr)
+    {
+        unsigned char test_data[9] = {0x01, 0xE0, 0x00,
                         0x00, 0x00, 0x00,
                         0x00, 0x00, 'A'};
 
-    interruptSocket->write((const char*)test_data, 9);
+        interruptSocket->write((const char*)test_data, 9);
+    }
 }
