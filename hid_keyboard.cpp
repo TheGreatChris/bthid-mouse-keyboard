@@ -76,14 +76,33 @@ void HID_Keyboard::testTimerExpired()
 
     if(controlSocket != nullptr){
         qDebug() << "control socket read:" << controlSocket->bytesAvailable();
-        qDebug() << controlSocket->readAll();
+        QByteArray recv_data = controlSocket->readAll();
+        if(recv_data.size() > 0)
+        {
+            qDebug() << recv_data;
+            switch((recv_data[0] & 0xF0))
+            {
+            case 0x90:
+                qDebug() << "Received SET_IDLE cmd";
+            break;
+
+            default:
+                qDebug() << "received unknown cmd";
+
+            }
+        }
     }
 
     if(interruptSocket != nullptr){
         qDebug() << "interrupt socket read:" << interruptSocket->bytesAvailable();
-        qDebug() << interruptSocket->readAll();
-    }
 
+        QByteArray recv_data = interruptSocket->readAll();
+        if(recv_data.size() > 0)
+        {
+            qDebug() << recv_data;
+        }
+    }
+/*
     if(interruptSocket != nullptr)
     {
         unsigned char test_data[9] = {0x01, 0xE0, 0x00,
@@ -92,4 +111,5 @@ void HID_Keyboard::testTimerExpired()
 
         interruptSocket->write((const char*)test_data, 9);
     }
+*/
 }
