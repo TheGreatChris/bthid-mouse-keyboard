@@ -114,13 +114,13 @@ void HID_Keyboard::testTimerExpired()
 
     if(interruptSocket != nullptr)
     {
-        unsigned char test_data[10] = {
+        unsigned char test_data[9] = {
                         0xA1,
-                        0x01, 0xE0, 0x00,
+                        0xE0, 0x00,
                         0x01, 0x02, 0x03,
                         0x04, 0x05, 0x4b};
 
-        if(interruptSocket->write((const char*)test_data, 10) != 10)
+        if(interruptSocket->write((const char*)test_data, 9) != 9)
             qDebug() << "failed sending report";
         else
             qDebug() << "send report success";
