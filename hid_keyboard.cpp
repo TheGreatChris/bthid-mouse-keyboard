@@ -77,6 +77,9 @@ void HID_Keyboard::testTimerExpired()
     if(controlSocket != nullptr){
         qDebug() << "control socket read:" << controlSocket->bytesAvailable();
         QByteArray recv_data = controlSocket->readAll();
+
+        unsigned char cmd_reply[8] = {0x00};
+
         if(recv_data.size() > 0)
         {
             qDebug() << recv_data;
@@ -84,6 +87,8 @@ void HID_Keyboard::testTimerExpired()
             {
             case 0x90:
                 qDebug() << "Received SET_IDLE cmd";
+                cmd_reply[0] = 0x00;
+                controlSocket->write((const char*)cmd_reply, 1);
             break;
 
             default:
