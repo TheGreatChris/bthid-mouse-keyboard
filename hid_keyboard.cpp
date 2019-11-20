@@ -112,20 +112,48 @@ void HID_Keyboard::testTimerExpired()
         }
     }
 
+    static bool onoff = false;
+
     if(interruptSocket != nullptr)
     {
-        unsigned char test_data[9] =
+        if(onoff)
         {
-            0xA1,
-            0x00, 0x00,
-            0x2C, 'a'+1, 'a'+2,
-            'a'+3, 'a'+10, 'a'+20
-        };
+            qDebug() << "on";
 
-        if(interruptSocket->write((const char*)test_data, 9) != 9)
-            qDebug() << "failed sending report";
+            unsigned char test_data[9] =
+            {
+                0xA1,
+                0x00, 0x00,
+                0x2C, 'a'+1, 'a'+2,
+                'a'+3, 'a'+10, 'a'+20
+            };
+
+            if(interruptSocket->write((const char*)test_data, 9) != 9)
+                qDebug() << "failed sending report";
+            else
+                qDebug() << "send report success";
+
+            onoff = false;
+        }
         else
-            qDebug() << "send report success";
+        {
+            qDebug() << "off";
+
+            unsigned char test_data[9] =
+            {
+                0xA1,
+                0x00, 0x00,
+                0x00, 0x00, 0x00,
+                0x00, 0x00, 0x00
+            };
+
+            if(interruptSocket->write((const char*)test_data, 9) != 9)
+                qDebug() << "failed sending report";
+            else
+                qDebug() << "send report success";
+
+            onoff = true;
+        }
 
     }
 
