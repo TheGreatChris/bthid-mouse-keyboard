@@ -88,7 +88,11 @@ void HID_Keyboard::testTimerExpired()
             case 0x90:
                 qDebug() << "Received SET_IDLE cmd";
                 cmd_reply[0] = 0x00;
-                controlSocket->write((const char*)cmd_reply, 1);
+                if(controlSocket->write((const char*)cmd_reply, 1) == 1)
+                    qDebug() << "Reply send";
+                else
+                    qDebug() << "failed sending reply";
+
             break;
 
             default:
@@ -107,14 +111,16 @@ void HID_Keyboard::testTimerExpired()
             qDebug() << recv_data;
         }
     }
-/*
+
     if(interruptSocket != nullptr)
     {
-        unsigned char test_data[9] = {0x01, 0xE0, 0x00,
+        unsigned char test_data[10] = {
+                        0xA1,
+                        0x01, 0xE0, 0x00,
                         0x00, 0x00, 0x00,
                         0x00, 0x00, 'A'};
 
         interruptSocket->write((const char*)test_data, 9);
     }
-*/
+
 }
