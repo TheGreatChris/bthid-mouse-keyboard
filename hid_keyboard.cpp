@@ -117,10 +117,10 @@ void HID_Keyboard::testTimerExpired()
         unsigned char test_data[10] = {
                         0xA1,
                         0x01, 0xE0, 0x00,
-                        0x00, 0x00, 0x00,
-                        0x00, 0x00, 'A'};
+                        0x01, 0x02, 0x03,
+                        0x04, 0x05, 'A'};
 
-        interruptSocket->write((const char*)test_data, 9);
+        interruptSocket->write((const char*)test_data, 10);
     }
 
 }
