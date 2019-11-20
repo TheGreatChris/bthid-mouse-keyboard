@@ -124,8 +124,8 @@ void HID_Keyboard::testTimerExpired()
             {
                 0xA1,
                 0x00, 0x00,
-                0x2C, 'a'+1, 'a'+2,
-                'a'+3, 'a'+10, 'a'+20
+                0x04, 0x05, 0x06,
+                0x07, 0x08, 0x09
             };
 
             if(interruptSocket->write((const char*)test_data, 9) != 9)
